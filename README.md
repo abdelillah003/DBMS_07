@@ -58,7 +58,8 @@ pg_isready
 
 > **Screenshot 1:** Take a screenshot showing all three version/status checks.
 >
-> `[insert screenshot]`
+> <img width="475" height="123" alt="Screenshot 2026-07-03 210835" src="https://github.com/user-attachments/assets/6f3e3d9a-cceb-46b3-8a0a-a9dc6edfb813" />
+
 
 ---
 
@@ -111,19 +112,21 @@ Exit the REPL:
 > **Screenshot 2:** Take a screenshot showing all REPL interactions above,
 > including the f-string output.
 >
-> `[insert screenshot]`
+> <img width="686" height="441" alt="Screenshot 2026-07-03 211909" src="https://github.com/user-attachments/assets/d73bb9f2-425c-4425-b9fe-a807b6cdc77d" />
+
 
 ### Questions for Section 1
 
 **Question 1.1:** In the REPL, typing `2 ** 10` without `print` still shows
 `1024`. Why does this work in the REPL but *not* in a script file?
 
-> *Your answer:*
+> The REPL automatically prints the result of any expression entered. A script file only executes code without displaying output unless you explicitly use print().
 
 **Question 1.2:** The f-string format specifier `:.2f` controls how `price`
 is displayed. What does it mean, and what would `:.4f` produce for `18.9`?
 
-> *Your answer:*
+> :.2f formats a float with 2 decimal places.
+  :.4f would produce 18.9000 for 18.9.
 
 ---
 
@@ -167,13 +170,13 @@ Exit the REPL:
 can write `sqrt(144)` without the `math.` prefix. What is the drawback of
 this style compared to `import math`?
 
-> *Your answer:*
+> from math import sqrt pollutes the namespace – you lose the context of where the function comes from. If you later define your own sqrt() function, it will override the imported one, causing confusion and potential bugs. With import math, you keep the namespace clear and avoid collisions.
 
 **Question 2.2:** The standard library is always available — it requires no
 installation. Name two other standard library modules (not `math`) and
 describe in one sentence what each one is used for.
 
-> *Your answer:*
+> os – Interacts with the operating system (files, environment variables). json – Parses and generates JSON data.
 
 ---
 
@@ -234,7 +237,8 @@ python3 berechnung.py
 > **Screenshot 3:** Take a screenshot showing the terminal output of
 > `python3 berechnung.py`.
 >
-> `[insert screenshot]`
+> <img width="554" height="79" alt="image" src="https://github.com/user-attachments/assets/2c0b0a15-fe00-462d-953f-320ac07fed24" />
+
 
 ### Step 4 – Commit
 
@@ -251,13 +255,13 @@ it only under `if __name__ == "__main__"`. What is `__name__` set to when the
 file is run directly? What is it set to when the file is *imported* by another
 module — and why does this distinction matter?
 
-> *Your answer:*
+> When the file is run directly, __name__ is set to "__main__". When the file is imported by another module, __name__ is set to the module's name (e.g., "berechnung"). This distinction matters because code inside the if __name__ == "__main__": block only executes when the script is run directly, not when imported – allowing the file to be used both as a script and as a reusable module.
 
 **Question 3.2:** The `kreisflaeche` function could be defined without
 importing `math` by hard-coding `3.14159` instead of `math.pi`. Give one
 concrete reason why using `math.pi` is preferable.
 
-> *Your answer:*
+> Using math.pi is preferable because it provides higher precision than hard-coding 3.14159. It also makes the code more readable, maintainable, and less error-prone – if a more precise value of pi is ever needed, it updates automatically with the Python version.
 
 ---
 
@@ -417,7 +421,8 @@ uv --version
 
 > **Screenshot 4:** Take a screenshot showing the `uv --version` output.
 >
-> `[insert screenshot]`
+> <img width="466" height="41" alt="image" src="https://github.com/user-attachments/assets/123e629c-623c-4ef7-a238-03bc847e31ec" />
+
 
 ---
 
@@ -493,7 +498,8 @@ uv run python3 berechnung.py
 > **Screenshot 5:** Take a screenshot showing the colourful table output
 > from `uv run`.
 >
-> `[insert screenshot]`
+> <img width="655" height="174" alt="image" src="https://github.com/user-attachments/assets/89bf79a2-e8b0-4886-be1b-48915e2a0317" />
+
 
 ### Step 5 – Commit
 
@@ -510,13 +516,13 @@ git push
 `uv.lock` be committed to version control while generated files like `.venv/`
 should not?
 
-> *Your answer:*
+> pyproject.toml declares project metadata and dependencies at a high level (e.g., "rich" without a version). uv.lock pins exact versions of every package installed. uv.lock should be committed to version control to ensure reproducibility across machines, while .venv/ should be ignored (e.g., in .gitignore) because it contains system-specific files and can be regenerated from the lockfile.
 
 **Question 4.2:** `uv run python3 berechnung.py` uses the virtual
 environment's Python. What would happen if you ran `python3 berechnung.py`
 directly (without `uv run`) and `rich` is not installed system-wide?
 
-> *Your answer:*
+> If python3 berechnung.py is run directly (without uv run), Python would use the system-wide Python installation. Since rich is only installed in the virtual environment, the script would fail with ModuleNotFoundError: No module named 'rich'.
 
 ---
 
@@ -632,7 +638,8 @@ uv run python3 abfrage.py
 
 > **Screenshot 6:** Take a screenshot showing the query result table.
 >
-> `[insert screenshot]`
+> <img width="623" height="131" alt="image" src="https://github.com/user-attachments/assets/d57a0313-6269-473c-a4a5-04380d648574" />
+
 
 ### Step 4 – Commit
 
@@ -648,20 +655,20 @@ git push
 query. What is the role of a cursor in the database connection model?
 Why is one connection able to hold multiple cursors simultaneously?
 
-> *Your answer:*
+> A cursor is an object that sends SQL commands to the database and retrieves the results. It manages the state of a query (e.g., position in the result set). One connection can hold multiple cursors simultaneously because each cursor is independent and maintains its own state – they only share the network connection and the transaction.
 
 **Question 5.2:** The connection parameters (username, password, host) are
 written directly in the script as `DB_CONFIG`. Why is this a security problem
 in a real project? Name one common alternative for storing credentials outside
 the source code.
 
-> *Your answer:*
+> Hard-coded credentials are a security risk because they end up in version control, can be accidentally exposed publicly, and cannot be changed per environment. An alternative is environment variables (e.g., os.getenv("DB_PASSWORD")), which are stored outside the source code.
 
 **Question 5.3:** `cursor.fetchall()` returns a list of tuples. The script
 accesses `row[0]`, `row[1]`, etc. by index. What is the risk of this approach,
 and which `psycopg2` cursor subclass would return named columns instead?
 
-> *Your answer:*
+> Accessing rows by index (row[0], row[1]) is risky because the code breaks or returns wrong data if the column order changes – and it becomes unreadable. The solution is RealDictCursor, which returns rows as dictionaries, allowing access by column name (row['nachname']).
 
 ---
 
@@ -755,7 +762,12 @@ from your code.
 > **Screenshot 7:** Take a screenshot showing the `curl` response and the
 > uvicorn startup log in the other terminal.
 >
-> `[insert screenshot]`
+> <img width="962" height="135" alt="image" src="https://github.com/user-attachments/assets/9bbba7c8-6789-4214-a6df-fa37bc4454c2" />
+<img width="589" height="48" alt="image" src="https://github.com/user-attachments/assets/6b250d9f-7610-4294-a1ad-c9c2f5c6b6cf" />
+
+
+
+
 
 ### Step 4 – Commit
 
@@ -773,12 +785,12 @@ git push
 automatically. What standard does it use to describe the API, and what
 advantage does machine-readable API documentation have over a PDF?
 
-> *Your answer:*
+> FastAPI uses the OpenAPI standard (formerly known as Swagger) to describe the API automatically. The advantage of machine-readable API documentation over a PDF is that it is interactive – clients can test endpoints directly in the browser. It also enables automatic client SDK generation, validation, and integration with other tools without manual updates.
 
 **Question 6.2:** The `--reload` flag is useful during development but should
 not be used in production. Why?
 
-> *Your answer:*
+> The --reload flag should not be used in production because it watches files for changes and restarts the server automatically – this consumes extra system resources and can cause unexpected downtime. In production, stability and performance are critical; the server should run without autoreload, and code changes should be deployed through a controlled process (e.g., restarting the server manually or using a process manager).
 
 ---
 
@@ -938,7 +950,10 @@ Try posting the same e-mail a second time and observe the 409 error response.
 > **Screenshot 8:** Take a screenshot showing the curl output for all three
 > endpoints, including the 409 error on the duplicate POST.
 >
-> `[insert screenshot]`
+> <img width="975" height="236" alt="image" src="https://github.com/user-attachments/assets/cc7883cc-9407-488e-a6eb-6ff8e4d22aa1" />
+<img width="1103" height="309" alt="image" src="https://github.com/user-attachments/assets/b6571913-98a9-4ea2-aea1-d3ddc889a8f3" />
+
+
 
 ### Step 4 – Commit
 
@@ -955,20 +970,24 @@ git push
 What would be the security risk of building the SQL string by concatenation
 (`"VALUES ('" + mitglied.nachname + "'...)`)? Name the attack this prevents.
 
-> *Your answer:*
+> Building SQL strings by concatenation is vulnerable to SQL Injection attacks. An attacker could send malicious input (e.g., ' OR '1'='1) that alters the SQL query and potentially reads, modifies, or deletes data. Parameterized queries (using %s placeholders) prevent this because the database treats the values as data, not as executable SQL code.
 
 **Question 7.2:** The `RealDictCursor` in endpoints 1 and 2 returns each row
 as a dictionary instead of a tuple. Why does this make the API response more
 useful to a client that receives the JSON output?
 
-> *Your answer:*
+> With RealDictCursor, each row is returned as a dictionary with column names as keys (e.g., row["nachname"]). The API response then includes meaningful field names in the JSON output, making it easier for the client to understand and process the data. With tuples, the client would have to guess or hard-code column positions, which is fragile and error-prone.
 
 **Question 7.3:** A caller of `GET /ausleihen/offen` receives a list of open
 loans without knowing anything about the underlying table structure, join logic,
 or database credentials. Name two concrete advantages this abstraction provides
 compared to giving every caller direct database access.
 
-> *Your answer:*
+> Two concrete advantages:
+
+-Separation of concerns – The client does not need to know the database schema, joins, or credentials. It simply requests data via HTTP, and the API handles the complexity.
+
+-Security – The API can enforce access control and validation (e.g., hiding sensitive columns, restricting which users can access certain data). Direct database access would expose the entire schema and require managing individual user permissions.
 
 ---
 
@@ -980,7 +999,7 @@ can call `/ausleihen/offen` without knowing SQL. What is the general software
 engineering principle behind this, and where else in a typical application
 stack does the same principle appear?
 
-> *Your answer:*
+> The principle is abstraction or information hiding – the API hides the complexity of the database schema and query logic behind a simple HTTP interface. The same principle appears in frontend-backend separation (the frontend only knows the API, not the database), in database views (hiding complex joins from application code), and in object-relational mapping (ORM) layers that abstract SQL queries into Python objects.
 
 **Question B – Stateless HTTP vs. database connections:**  
 Each of the three endpoints opens a new database connection and closes it after
@@ -988,7 +1007,7 @@ the query. In a production system with hundreds of simultaneous requests this
 would be inefficient. What is the standard solution, and which Python library
 provides it for `psycopg2`?
 
-> *Your answer:*
+> The standard solution is connection pooling – reusing existing database connections instead of opening a new one for each request. The library that provides this for psycopg2 is psycopg2.pool.SimpleConnectionPool or psycopg2.pool.ThreadedConnectionPool (or using a dedicated connection pooler like PgBouncer).
 
 **Question C – Authentication:**  
 The API currently has no access control — anyone who can reach the server on
@@ -997,7 +1016,7 @@ to a FastAPI application are **JWT tokens** (stateless, validated by the API
 itself) and **Keycloak** (external identity provider, acting as middleware).
 What is the main operational difference between the two approaches?
 
-> *Your answer:*
+> JWT tokens are validated directly by the API – the API checks the token's signature and expiration without contacting any external service. Keycloak acts as an external identity provider – the API forwards authentication requests to Keycloak, which validates the user and returns a token or session. The main operational difference is that JWT is self-contained and stateless (no external dependency for validation), while Keycloak requires a separate service to be running and reachable.
 
 **Question D – The abstraction chain:**  
 You have now built a complete chain: raw data in PostgreSQL → SQL query in
@@ -1005,7 +1024,15 @@ Python → JSON response from FastAPI → curl client. Describe in two sentences
 what each link in this chain contributes and why removing any one of them
 would make the system harder to use or maintain.
 
-> *Your answer:*
+> -PostgreSQL stores the raw data persistently and ensures data integrity.
+
+> -Python (psycopg2) translates the application's requests into SQL and fetches results.
+
+> -FastAPI exposes the data as HTTP endpoints, providing structured JSON responses and automatic documentation.
+
+> -curl is a simple client that demonstrates how any program can access the API over HTTP.
+
+> Removing any one link would either expose the client to database complexity, require clients to handle SQL directly, break language-agnostic access, or prevent simple testing and integration.
 
 ---
 
